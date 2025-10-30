@@ -1,0 +1,21 @@
+RESUMEN DE SIMULACIÓN - SUPERMERCADO
+==================================================
+
+Clientes atendidos: 10
+Tiempo promedio de espera: 96.27 seg
+Tiempo promedio de atención: 84.55 seg
+Clientes por minuto: 32.34
+
+Estadísticas por Caja:
+
+Caja 1:
+  Clientes: 3
+  Eficiencia: 99.2%
+
+Caja 2:
+  Clientes: 2
+  Eficiencia: 98.4%
+
+Caja 3:
+  Clientes: 5
+  Eficiencia: 100.0%

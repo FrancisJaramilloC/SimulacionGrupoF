@@ -44,6 +44,9 @@ class Menu:
             simulador = Simulador(tuti, visualizador)
             simulador.ejecutar(velocidad)
         else:
+            # Mostrar estadísticas aunque no simule
+            print("\n📊 Estadísticas actuales:")
+            tuti.estadisticas.mostrar_estadisticas()
             print("\n👋 ¡Gracias por usar el simulador!")
     
     @staticmethod
@@ -76,6 +79,9 @@ class Menu:
         if simular == 's':
             simulador = Simulador(tuti, visualizador)
             simulador.ejecutar(0.8)
+        else:
+            print("\n📊 Estadísticas actuales:")
+            tuti.estadisticas.mostrar_estadisticas()
     
     @staticmethod
     def ejecutar():
