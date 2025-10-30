@@ -1,10 +1,10 @@
 # SimulacionGrupoF
 El siguiente sistema sigue un patron de diseño modular con separacion de responsabilidades.
-##modelos.py
+## modelos.py
 Define las estructuras de datos fundamentales del sistema.
-###Tipo de caja
+### Tipo de caja
 Esta representacion es un Enum, en la que se definen, la caja normal, la cual no tiene limite de articulos y la caja express, la cual posee un limite de articulos.
-###Cliente(DataClass)
+### Cliente(DataClass)
 Representa a un cliente en la fila de espera y cuenta con los siguiente atributos:
 - id: Identificador unico del cliente.
 - num_articulos: La cantidad de articulos que lleva.
@@ -12,7 +12,7 @@ Representa a un cliente en la fila de espera y cuenta con los siguiente atributo
 Tambien cuenta con el siguiente metodo:
 - __repr__(): Es la representacion visual del cliente mostrando el numero de articulos.
 
-###Caja(DataClass)
+### Caja(DataClass)
 Representa una caja registradora del supermercado y cuenta con los siguientes atributos:
 - numero: Es el numero con el que se identifica la caja.
 - tipo: Muestra que tipo de caja es, ya sea express o normal.
@@ -31,19 +31,19 @@ Esta clase se encarga de administrar las cajas y la logica general del sistema y
 - tiene_clientes_en_espera: Este metodo verifica si quedan clientes por atender.
 - atender_todos: Este metodo atiende un cliente de cada caja con fila.
 
-##generador_clientes.py
+## generador_clientes.py
 Esta clase crea clientes aleatorios con distintas caracteristicas y los metodos que tiene son los siguientes:
 - generar_cliente(maz_articulos = 50): Este metodo se encarga de crear un cliente con articulos y tiempo aleatorios.
 - generar_multiples_clientes(maz_articulos = 50): Este metodo se encarga de generar varios clientes a la vez.
 
-##configurador.py
+## configurador.py
 Esta clase permite crear las cjas mediante la consola, solicitando datos al usuario.
 Ejemplo de flujo: 
 1. Pide cantidad de cajas normales y express.
 2. Solicita numero de clientes y velocidad de escaneo para cada una.
 3. Crea las cajas en el sistema.
 
-##visualizador.py
+## visualizador.py
 Esta clase muestra el estado actual del supermercado y las cajas y cumple con las siguientes funciones:
 - limpiar_pantalla: Limpia la consola.
 - mostrar_cabecera: Muestra el titulo del sistema.
@@ -51,7 +51,12 @@ Esta clase muestra el estado actual del supermercado y las cajas y cumple con la
 - mostar_atencion(caja, cliente, tiempo): Muestra si el cliente esta siendo atendido y en que caja.
 - mostrar_recomendacion(caja, num_articulos): Muestra al usuario cual seria la caja mas rapida.
   
-##simulador.py
-Ejecuta la simulacion paso a paso. 
-##menu.py
-##main.py
+## simulador.py
+Esta clase se encarga de controlar el proceso de simulacion paso a paso, coordinando las cajas y los clientes mientras se muestran los resultados en pantalla y para esto utiliza el siguiente metodo:
+- ejecutar(velocidad=0.5): Este metodo funciona de la siguiente manera, mientras haya clientes, muestra el estado actual de todas las cajas, es decir que clientes estan en fila y cual se esta antendiendo, ordena que cada caja atienda a su siguiente clientes y muestra los resultado de esas atenciones por ultimo espera unos segundos entre cada ciclo, para simular el paso del tiempo. Finalmente cuadno no haya mas clientes finaliza la simulacion, mostrando el estado final y un mensaje de cierre.
+## menu.py
+Este modulo actua como el punto de entrada del programa, permitiendo al usuario elegir con que opcion quiere ejecutar el programa:
+- modo_personalizado: Permite al usuario configurar manualmente las cajas del supermercado.
+- modo_ejemplo: Crea una configuracion automatica de demostracion, con un numero fijo de cajas y clientes generados de manera aleatoria. 
+## main.py
+Este modelo sirve para iniciar la aplicacion 
