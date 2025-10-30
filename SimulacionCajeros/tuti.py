@@ -1,16 +1,16 @@
 from typing import List
-from .modelos import Caja, TipoCaja, Cliente
+from .modelos import Caja, TipoCaja
 from .generador_clientes import GeneradorClientes
 
 class Tuti:
-    """Administra todas las cajas del supermercado"""
+    """Administra todas las cajas del tuti"""
     
     def __init__(self):
         self.cajas: List[Caja] = []
         self.generador = GeneradorClientes()
         
     def agregar_caja(self, tipo: TipoCaja, tiempo_escaneo: float, num_clientes: int):
-        """Agrega una nueva caja al supermercado"""
+        """Agrega una nueva caja al tuti"""
         numero = len(self.cajas) + 1
         max_articulos = 10 if tipo == TipoCaja.EXPRESS else None
         

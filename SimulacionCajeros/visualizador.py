@@ -1,9 +1,9 @@
 import os
 from .modelos import Caja, TipoCaja, Cliente
-from .tuti import Tuti as Supermercado
+from .tuti import Tuti
 
 class Visualizador:
-    """Maneja la visualización del estado del supermercado"""
+    """Maneja la visualización del estado del tuti"""
     
     @staticmethod
     def limpiar_pantalla():
@@ -45,14 +45,14 @@ class Visualizador:
         print()
     
     @staticmethod
-    def mostrar_estado_supermercado(supermercado: Supermercado, limpiar=True):
-        """Muestra el estado completo del supermercado"""
+    def mostrar_estado_tuti(tuti:  Tuti, limpiar=True):
+        """Muestra el estado completo del tuti"""
         if limpiar:
             Visualizador.limpiar_pantalla()
         
         Visualizador.mostrar_cabecera()
         
-        for caja in supermercado.cajas:
+        for caja in tuti.cajas:
             Visualizador.mostrar_caja(caja)
         
         print("=" * 80)

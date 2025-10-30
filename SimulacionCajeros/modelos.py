@@ -18,7 +18,7 @@ class Cliente:
 
 @dataclass
 class Caja:
-    """Representa una caja del supermercado"""
+    """Representa una caja del tuti"""
     numero: int
     tipo: TipoCaja
     tiempo_escaneo: float  # segundos por artículo

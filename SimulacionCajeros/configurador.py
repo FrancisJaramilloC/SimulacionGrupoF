@@ -1,7 +1,8 @@
-from .modelos import Supermercado, TipoCaja
+from .tuti import Tuti
+from .modelos import TipoCaja
 
 class Configurador:
-    """Maneja la configuración interactiva del supermercado"""
+    """Maneja la configuración interactiva del Tuti"""
     
     @staticmethod
     def solicitar_entero(mensaje: str, minimo: int = 0, maximo: int = None) -> int:
@@ -33,10 +34,10 @@ class Configurador:
                 print("❌ Por favor ingresa un número válido")
     
     @staticmethod
-    def configurar_cajas(supermercado: Supermercado):
-        """Configura todas las cajas del supermercado"""
+    def configurar_cajas(tuti: Tuti):
+        """Configura todas las cajas del Tuti"""
         print("=" * 80)
-        print("CONFIGURACIÓN DEL SUPERMERCADO".center(80))
+        print("CONFIGURACIÓN DEL Tuti".center(80))
         print("=" * 80)
         print()
         
@@ -53,7 +54,7 @@ class Configurador:
             tiempo_escaneo = Configurador.solicitar_flotante(
                 "  Tiempo de escaneo por artículo (segundos): ", 0.1
             )
-            supermercado.agregar_caja(TipoCaja.NORMAL, tiempo_escaneo, num_clientes)
+            tuti.agregar_caja(TipoCaja.NORMAL, tiempo_escaneo, num_clientes)
         
         # Cajas express
         print()
@@ -69,4 +70,4 @@ class Configurador:
             tiempo_escaneo = Configurador.solicitar_flotante(
                 "  Tiempo de escaneo por artículo (segundos): ", 0.1
             )
-            supermercado.agregar_caja(TipoCaja.EXPRESS, tiempo_escaneo, num_clientes)
+            tuti.agregar_caja(TipoCaja.EXPRESS, tiempo_escaneo, num_clientes)
