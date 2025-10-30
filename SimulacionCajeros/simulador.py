@@ -15,7 +15,7 @@ class Simulador:
         time.sleep(2)
         
         while self.tuti.tiene_clientes_en_espera():
-            self.visualizador.mostrar_estado_supermercado(self.tuti)
+            self.visualizador.mostrar_estado_tuti(self.tuti)
             
             # Atender clientes
             atenciones = self.tuti.atender_todos()
@@ -25,5 +25,5 @@ class Simulador:
             print(f"\n⏳ Procesando... (espera {velocidad}s)")
             time.sleep(velocidad)
         
-        self.visualizador.mostrar_estado_supermercado(self.tuti)
+        self.visualizador.mostrar_estado_tuti(self.tuti)
         print("Simulación completada. Todas las cajas están vacías.\n")
