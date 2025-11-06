@@ -14,10 +14,10 @@ class Tuti:
         numero = len(self.cajas) + 1
         max_articulos = 10 if tipo == TipoCaja.EXPRESS else None
         
-        # Generar clientes
+        # Generar clientes, respetando el límite de la caja express
         clientes = self.generador.generar_multiples_clientes(
-            num_clientes, 
-            max_articulos if max_articulos else 50
+            num_clientes,
+            max_articulos=max_articulos if max_articulos else 20
         )
         
         caja = Caja(numero, tipo, tiempo_escaneo, clientes, max_articulos)

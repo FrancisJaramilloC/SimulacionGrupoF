@@ -18,7 +18,7 @@ class Menu:
         Configurador.configurar_cajas(tuti)
         
         # Mostrar estado inicial
-        print("\n📊 Estado inicial del Tuti:")
+        print("\n Estado inicial del Tuti:")
         visualizador.mostrar_estado_tuti(tuti, limpiar=False)
 
         # Simular nuevo cliente
@@ -44,7 +44,7 @@ class Menu:
             simulador = Simulador(tuti, visualizador)
             simulador.ejecutar(velocidad)
         else:
-            print("\n👋 ¡Gracias por usar el simulador!")
+            print("\n Gracias por visitar el tuti bro")
     
     @staticmethod
     def modo_ejemplo():
