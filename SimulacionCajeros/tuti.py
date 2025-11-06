@@ -1,8 +1,6 @@
 from typing import List
-import time
 from .modelos import Caja, TipoCaja
 from .generador_clientes import GeneradorClientes
-from .estadisticas import EstadisticasSupermercado
 
 class Tuti:
     """Administra todas las cajas del tuti"""
@@ -10,8 +8,6 @@ class Tuti:
     def __init__(self):
         self.cajas: List[Caja] = []
         self.generador = GeneradorClientes()
-        self.estadisticas = EstadisticasSupermercado()  # ← CRÍTICO: Inicializar estadísticas
-        self.tiempo_inicio_caja = {}  # Para rastrear cuándo empezó a atender cada caja
         
     def agregar_caja(self, tipo: TipoCaja, tiempo_escaneo: float, num_clientes: int):
         """Agrega una nueva caja al tuti"""
@@ -23,10 +19,6 @@ class Tuti:
             num_clientes,
             max_articulos=max_articulos if max_articulos else 20
         )
-        
-        # Registrar clientes en estadísticas
-        for _ in clientes:
-            self.estadisticas.registrar_cliente_en_cola()
         
         caja = Caja(numero, tipo, tiempo_escaneo, clientes, max_articulos)
         self.cajas.append(caja)
@@ -49,37 +41,9 @@ class Tuti:
     def atender_todos(self) -> List[tuple]:
         """Atiende un cliente de cada caja que tenga clientes"""
         atenciones = []
-        tiempo_actual = time.time()
-        
         for caja in self.cajas:
             if caja.clientes:
-                # Calcular tiempo de espera (tiempo que estuvo en cola)
-                tiempo_en_cola = caja.calcular_tiempo_total()
-                tiempo_cliente_actual = (caja.clientes[0].num_articulos * caja.tiempo_escaneo + caja.clientes[0].tiempo_cobro)
-                tiempo_espera = max(0, tiempo_en_cola - tiempo_cliente_actual)
-                
-                # Registrar inicio de atención
-                self.estadisticas.registrar_inicio_atencion(caja.numero, tiempo_espera)
-                
-                # Atender cliente
                 cliente = caja.atender_cliente()
                 tiempo_atencion = (cliente.num_articulos * caja.tiempo_escaneo) + cliente.tiempo_cobro
-                
-                # Registrar fin de atención
-                self.estadisticas.registrar_fin_atencion(caja.numero, tiempo_atencion)
-                
                 atenciones.append((caja, cliente, tiempo_atencion))
-                
-                # Registrar tiempo de inicio para esta caja
-                self.tiempo_inicio_caja[caja.numero] = tiempo_actual
-            else:
-                # Si la caja está inactiva, registrar tiempo inactivo
-                if caja.numero in self.tiempo_inicio_caja:
-                    tiempo_inactivo = tiempo_actual - self.tiempo_inicio_caja[caja.numero]
-                    self.estadisticas.registrar_tiempo_inactivo(caja.numero, tiempo_inactivo)
-        
         return atenciones
-    
-    def obtener_estadisticas(self) -> EstadisticasSupermercado:
-        """Retorna el objeto de estadísticas"""
-        return self.estadisticas
