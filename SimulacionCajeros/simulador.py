@@ -1,11 +1,11 @@
 import time
 from .tuti import Tuti
-from .visualizador import Visualizador
+from .visualizador_pygame import PygameVisualizador
 
 class Simulador:
     """Ejecuta la simulación de atención de clientes"""
     
-    def __init__(self, tuti: Tuti, visualizador: Visualizador):
+    def __init__(self, tuti: Tuti, visualizador: PygameVisualizador):
         self.tuti = tuti
         self.visualizador = visualizador
     

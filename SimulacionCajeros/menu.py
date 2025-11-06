@@ -1,9 +1,9 @@
 from .modelos import TipoCaja
 from .configurador import Configurador
-from .visualizador import Visualizador
+from .visualizador_pygame import PygameVisualizador
 from .simulador import Simulador
 from .tuti import Tuti
-import time
+import time, random
 
 class Menu:
     """Maneja el menú principal del programa"""
@@ -12,7 +12,7 @@ class Menu:
     def modo_personalizado():
         """Ejecuta el modo de configuración personalizada"""
         tuti = Tuti()
-        visualizador = Visualizador()
+        visualizador = PygameVisualizador()
         
         # Configurar cajas
         Configurador.configurar_cajas(tuti)
@@ -53,8 +53,8 @@ class Menu:
         time.sleep(1)
         
         tuti = Tuti()
-        visualizador = Visualizador()
-        
+        visualizador = PygameVisualizador()
+
         # Crear configuración predefinida
         tuti.agregar_caja(TipoCaja.NORMAL, 5, 3)
         tuti.agregar_caja(TipoCaja.NORMAL, 7, 2)
@@ -62,8 +62,7 @@ class Menu:
         
         visualizador.mostrar_estado_tuti(tuti)
         
-        # Simular nuevo cliente
-        import random
+        # Simular nuevo client
         num_articulos = random.randint(1, 50)
         print(f"\n👤 Nuevo cliente con {num_articulos} artículos")
 

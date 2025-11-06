@@ -84,7 +84,7 @@ class PygameVisualizador:
 
         pygame.display.flip()
 
-    def run_simulation(self, tuti: Tuti):
+    def mostrar_estado_tuti(self, tuti: Tuti, limpiar: bool = True):
         """Ejecuta el bucle principal de la simulación y visualización."""
         num_cajas = len(tuti.cajas)
         clientes_en_atencion = [None] * num_cajas
@@ -163,7 +163,7 @@ class PygameVisualizador:
         tuti.agregar_caja(TipoCaja.NORMAL, 7, 2)
         tuti.agregar_caja(TipoCaja.EXPRESS, 4, 5)
 
-        self.run_simulation(tuti)
+        self.mostrar_estado_tuti(tuti)
 
 if __name__ == "__main__":
     vis = PygameVisualizador()
