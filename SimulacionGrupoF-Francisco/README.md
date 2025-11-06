@@ -1,0 +1,2 @@
+# SimulacionGrupoF
+Cajas del supermercado

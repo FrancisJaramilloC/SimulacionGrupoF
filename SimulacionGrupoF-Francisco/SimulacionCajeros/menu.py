@@ -1,8 +1,7 @@
 from .modelos import TipoCaja
 from .configurador import Configurador
-from .visualizador import Visualizador
-from .simulador import Simulador
 from .tuti import Tuti
+from .animacion import Animacion
 import time
 
 class Menu:
@@ -12,47 +11,38 @@ class Menu:
     def modo_personalizado():
         """Ejecuta el modo de configuración personalizada"""
         tuti = Tuti()
-        visualizador = Visualizador()
         
         # Configurar cajas
         Configurador.configurar_cajas(tuti)
         
         # Mostrar estado inicial
-        print("\n Estado inicial del Tuti:")
+        print("\n📊 Estado inicial del Tuti")
+        from .visualizador import Visualizador
+        visualizador = Visualizador()
         visualizador.mostrar_estado_tuti(tuti, limpiar=False)
-
+        
         # Simular nuevo cliente
         print("\n👤 NUEVO CLIENTE")
         num_articulos_nuevo = Configurador.solicitar_entero(
             "¿Cuántos artículos tiene el nuevo cliente?: ", 1
         )
-        
         mejor_caja = tuti.encontrar_mejor_caja(num_articulos_nuevo)
-        
         if mejor_caja:
             visualizador.mostrar_recomendacion(mejor_caja, num_articulos_nuevo)
         else:
             print(f"\n❌ No hay cajas disponibles para {num_articulos_nuevo} artículos")
         
-        # Opción de simular
-        print()
-        simular = input("¿Deseas simular la atención de clientes? (s/n): ").lower()
+        # Preguntar si iniciar animación
+        simular = input("\n¿Deseas ver la simulación animada? (s/n): ").lower()
         if simular == 's':
             velocidad = Configurador.solicitar_flotante(
-                "Velocidad de simulación en segundos (recomendado 0.5-2): ", 0.1
+                "Velocidad de simulación (0.1 = rápida, 1 = lenta): ", 0.1
             )
-            simulador = Simulador(tuti, visualizador)
-            simulador.ejecutar(velocidad)
+            animacion = Animacion(tuti, velocidad=velocidad)
+            animacion.ejecutar()
         else:
-<<<<<<< HEAD
-            print("\n Gracias por visitar el tuti bro")
-=======
-            # Mostrar estadísticas aunque no simule
-            print("\n📊 Estadísticas actuales:")
-            tuti.estadisticas.mostrar_estadisticas()
-            print("\n👋 ¡Gracias por usar el simulador!")
->>>>>>> origin/Francisco
-    
+            print("\n👋 Gracias por usar el simulador!")
+
     @staticmethod
     def modo_ejemplo():
         """Ejecuta un ejemplo rápido predefinido"""
@@ -60,33 +50,26 @@ class Menu:
         time.sleep(1)
         
         tuti = Tuti()
-        visualizador = Visualizador()
-        
-        # Crear configuración predefinida
         tuti.agregar_caja(TipoCaja.NORMAL, 5, 3)
         tuti.agregar_caja(TipoCaja.NORMAL, 7, 2)
         tuti.agregar_caja(TipoCaja.EXPRESS, 4, 5)
         
-        visualizador.mostrar_estado_tuti(tuti)
+        from .visualizador import Visualizador
+        visualizador = Visualizador()
+        visualizador.mostrar_estado_tuti(tuti, limpiar=False)
         
-        # Simular nuevo cliente
         import random
-        num_articulos = random.randint(1, 50)
+        num_articulos = random.randint(1,50)
         print(f"\n👤 Nuevo cliente con {num_articulos} artículos")
-
         mejor_caja = tuti.encontrar_mejor_caja(num_articulos)
         if mejor_caja:
             visualizador.mostrar_recomendacion(mejor_caja, num_articulos)
         
-        print()
-        simular = input("¿Simular atención? (s/n): ").lower()
+        simular = input("\n¿Deseas ver la simulación animada? (s/n): ").lower()
         if simular == 's':
-            simulador = Simulador(tuti, visualizador)
-            simulador.ejecutar(0.8)
-        else:
-            print("\n📊 Estadísticas actuales:")
-            tuti.estadisticas.mostrar_estadisticas()
-    
+            animacion = Animacion(tuti)
+            animacion.ejecutar()
+
     @staticmethod
     def ejecutar():
         """Ejecuta el menú principal"""
@@ -95,8 +78,7 @@ class Menu:
         print("="*80)
         print("\nOpciones:")
         print("1. Configuración personalizada")
-        print("2. Ejemplo rápido")
-        print()
+        print("2. Ejemplo rápido\n")
         
         opcion = input("Selecciona una opción (1-2): ")
         print()
